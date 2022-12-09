@@ -1,4 +1,4 @@
-package com.ho.study.algorithm.koh;
+package com.ho.study.algorithm.koh.recursion;
 
 public class Gcd {
  
