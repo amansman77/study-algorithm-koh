@@ -17,3 +17,15 @@
 ## Merge.java
 
 합병정렬을 수행하는 로직입니다.
+
+## Quick.java
+
+빠른정렬을 수행하는 로직입니다.
+
+## Heap.java
+
+힙정렬을 수행하는 로직입니다.
+
+## Counting.java
+
+Counting sort를 수행하는 로직입니다.
