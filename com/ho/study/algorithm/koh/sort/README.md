@@ -28,4 +28,8 @@
 
 ## Counting.java
 
-Counting sort를 수행하는 로직입니다.
+계수정렬을 수행하는 로직입니다.
+
+## Radix.java
+
+기수정렬을 수행하는 로직입니다.

@@ -46,4 +46,27 @@ public class Counting {
             System.out.print(data[i]);
         }
     }
+
+    public static void sort(int[] data, int k, int d, int i) {
+        int[] tmpArr = new int[data.length];
+        int[] countArr = new int[k];
+
+        for (int j = 0; j < data.length; j++) {
+            Integer target = Integer.valueOf(String.valueOf(data[j]).substring(d - i, d - i + 1));
+            countArr[target]++;
+        }
+
+        for (int j = 1; j < countArr.length; j++) {
+            countArr[j] = countArr[j-1] + countArr[j];
+        }
+
+        for (int j = data.length - 1; j >= 0; j--) {
+            Integer target = Integer.valueOf(String.valueOf(data[j]).substring(d - i, d - i + 1));
+            tmpArr[(countArr[target]--)-1] = data[j];
+        }
+
+        for (int j = 0; j < data.length; j++) {
+            data[j] = tmpArr[j];
+        }
+    }
 }
