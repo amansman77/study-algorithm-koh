@@ -1,5 +1,8 @@
 package com.ho.study.algorithm.koh.recursion;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Powerset {
     
     private static final char[] DATA = {'a', 'b', 'c', 'd', 'e', 'f'};
