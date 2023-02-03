@@ -9,6 +9,9 @@ public class Run implements Comparable<Run> {
     private Run leftChild;
     private Run rightChild;
 
+    private int codeword;
+    private int codewordLength;
+
     public Run(int data, int runLength) {
         this.symbol = (byte) data;
         this.runLength = runLength;
@@ -38,6 +41,15 @@ public class Run implements Comparable<Run> {
         this.frequency++;
     }
 
+    public void setCodeword(int codeword, int length) {
+        this.codeword = codeword;
+        this.codewordLength = length;
+    }
+
+    public boolean isLeaf() {
+        return this.leftChild == null && this.rightChild == null;
+    }
+
     public boolean isEquals(int data, int runLength) {
         if (this.symbol == (byte) data && this.runLength == runLength) {
             return true;
@@ -47,11 +59,12 @@ public class Run implements Comparable<Run> {
 
     @Override
     public String toString() {
-        return String.valueOf((char) this.symbol) + ", run length: " + this.runLength + "," + this.frequency;
+        return String.valueOf((char) this.symbol) + ", run length: " + this.runLength + "," + this.frequency + ", code: " + this.codeword + ", " + this.codewordLength;
     }
 
     @Override
     public int compareTo(Run o) {
         return this.frequency - o.frequency;
     }
+
 }
