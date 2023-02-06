@@ -67,4 +67,8 @@ public class Run implements Comparable<Run> {
         return this.frequency - o.frequency;
     }
 
+    public RunKey getRunKey() {
+        return new RunKey(this.symbol, this.runLength);
+    }
+
 }

@@ -3,13 +3,20 @@ package com.ho.study.algorithm.koh.compression;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.Map.Entry;
 
 public class HuffmanMethodWithRun {
     
     private List<Run> runs = new ArrayList<>();
     private MinHeap<Run> heap;
     private Run rootOfHuffmanTree = null;
+
+    private Map<RunKey, Run> codewordMap = new HashMap<>();
  
     private void collectRun(FileInputStream fis) throws IOException {
         int data = fis.read();
@@ -57,9 +64,28 @@ public class HuffmanMethodWithRun {
         // printRun();
 
         createHuffmanTree();
-        
         assignCodewords(this.rootOfHuffmanTree, 0, 0);
-        printHuffmanTree();
+        // printHuffmanTree();
+        storeRunIntoHashMap(this.rootOfHuffmanTree);
+        printCodewordMap();
+    }
+
+    private void printCodewordMap() {
+        Set<Entry<RunKey, Run>> entrySet = this.codewordMap.entrySet();
+        Iterator<Entry<RunKey, Run>> iterator = entrySet.iterator();
+        while (iterator.hasNext()) {
+            Entry<RunKey, Run> next = iterator.next();
+            System.out.println(next.getKey().toString() + next.getValue().toString());
+        }
+    }
+
+    private void storeRunIntoHashMap(Run node) {
+        if (node.isLeaf()) {
+            this.codewordMap.put(node.getRunKey(), node);
+        } else {
+            storeRunIntoHashMap(node.getLeftChild());
+            storeRunIntoHashMap(node.getRightChild());
+        }
     }
 
     private void assignCodewords(Run node, int codeword, int length) {
