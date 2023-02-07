@@ -30,11 +30,32 @@ public class Run implements Comparable<Run> {
         this.frequency = firstRun.frequency + secondRun.frequency;
     }
 
+    public byte getSymbol() {
+        return symbol;
+    }
+    
+    public Integer getRunLength() {
+        return runLength;
+    }
+
+    public Integer getFrequency() {
+        return frequency;
+    }
+
     public Run getLeftChild() {
         return this.leftChild;
     }
+    
     public Run getRightChild() {
         return this.rightChild;
+    }
+
+    public int getCodeword() {
+        return codeword;
+    }
+
+    public int getCodewordLength() {
+        return codewordLength;
     }
 
     public void addFrequency() {
