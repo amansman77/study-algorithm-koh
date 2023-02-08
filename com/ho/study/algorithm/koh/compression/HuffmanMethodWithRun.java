@@ -61,7 +61,23 @@ public class HuffmanMethodWithRun {
         storeRunIntoHashMap(this.rootOfHuffmanTree);
         // printCodewordMap();
 
+        fis.getChannel().position(0);
         encode(fis, fos);
+    }
+
+    public void decompressFile(RandomAccessFile fis, RandomAccessFile fos) throws IOException {
+        inputFrequencies(fis);
+        // printRun();
+
+        createHuffmanTree();
+        assignCodewords(this.rootOfHuffmanTree, 0, 0);
+        decode(fis, fos);
+    }
+
+    private void printRun() {
+        for (Run run : this.runs) {
+            System.out.println(run);
+        }
     }
 
     private void encode(FileInputStream fis, RandomAccessFile fos) throws IOException {
@@ -87,6 +103,32 @@ public class HuffmanMethodWithRun {
         padding(fos, byteBuffer);
     }
 
+    private void decode(RandomAccessFile fis, RandomAccessFile fos) throws IOException {
+        int data = fis.read();
+        Run position = this.rootOfHuffmanTree;
+        while (data > 0) {
+            // System.out.println("data: " + ByteUtil.getBinaryString((byte) data));
+            for (int i = 7; i >= 0; i--) {
+                int code = ((data >> i) & 0x01);
+                // System.out.println("code: " + ByteUtil.getBinaryString((byte) code));
+
+                position = position.getChild(code);
+                if (position.isLeaf()) {
+                    decode(fos, position);
+                    position = this.rootOfHuffmanTree;
+                }
+            }
+
+            data = fis.read();
+        }
+    }
+
+    private void decode(RandomAccessFile fos, Run position) throws IOException {
+        for (int i = 0; i < position.getRunLength(); i++) {
+            fos.writeByte(position.getSymbol());
+        }
+    }
+
     private void padding(RandomAccessFile fos, ByteBuffer byteBuffer) throws IOException {
         if (!byteBuffer.isEmpty()) {
             byteBuffer.padding();
@@ -106,6 +148,15 @@ public class HuffmanMethodWithRun {
             byteBuffer.write(fout);
 
             byteBuffer.set((byte) codeword, codewordLength - packSize);
+        }
+    }
+
+    private void inputFrequencies(RandomAccessFile fis) throws IOException {
+        int runSize = fis.readInt();
+        long inputFileSize = fis.readLong();
+
+        for (int i = 0; i < runSize; i++) {
+            runs.add(new Run(fis.readByte(), fis.readInt(), fis.readInt()));
         }
     }
 

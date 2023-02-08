@@ -92,4 +92,12 @@ public class Run implements Comparable<Run> {
         return new RunKey(this.symbol, this.runLength);
     }
 
+    public Run getChild(int code) {
+        if (code == 0) {
+            return this.leftChild;
+        } else {
+            return this.rightChild;
+        }
+    }
+
 }
