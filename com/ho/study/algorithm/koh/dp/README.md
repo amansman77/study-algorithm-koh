@@ -9,3 +9,8 @@
 ## Binomial.java
 
 [이항 계수(Binomial Coefficient)](https://ko.wikipedia.org/wiki/%EC%9D%B4%ED%95%AD_%EA%B3%84%EC%88%98)를 구현한 로직입니다.
+
+## MinCostPath.java
+
+정수들이 저장된 n*n 행렬의 좌상단에서 우하당까지 이동한다. 단 오른쪽이나 아래 방향으로만 이동할 수 있다.
+방문한 칸에 있는 정수들의 합이 최소화되도록 하라.
