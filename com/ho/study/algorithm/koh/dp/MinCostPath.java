@@ -37,13 +37,7 @@ public class MinCostPath {
     }
 
     private static int mat(int[][] mat, int n, int m, int[][] pathMat) {
-        int[][] L = new int[m+1][n+1];
-        for (int i = 0; i < m+1; i++) {
-            L[i][0] = 100;
-        }
-        for (int i = 0; i < n+1; i++) {
-            L[0][i] = 100;
-        }
+        int[][] L = createCache(n+1, m+1);
 
         for (int y = 1; y <= m; y++) {
             for (int x = 1; x <= n; x++) {
@@ -65,6 +59,17 @@ public class MinCostPath {
         // printArr(L);
         
         return L[m][n];
+    }
+
+    private static int[][] createCache(int sizeX, int sizeY) {
+        int[][] L = new int[sizeY][sizeX];
+        for (int i = 0; i < sizeY; i++) {
+            L[i][0] = 100;
+        }
+        for (int i = 0; i < sizeX; i++) {
+            L[0][i] = 100;
+        }
+        return L;
     }
 
     private static void printArr(int[][] arr) {
