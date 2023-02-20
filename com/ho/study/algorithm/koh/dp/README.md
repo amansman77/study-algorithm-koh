@@ -18,3 +18,7 @@
 ## MatrixChain.java
 
 행렬의 곱셈을 가장 적은 연산으로 할 수 있는 수를 구하라.
+
+## LongestCommonSubsequence.java
+
+두 문자열에서 공통으로 가진 부분 문자열 중 가장 긴 문자열의 길이를 구하라.
