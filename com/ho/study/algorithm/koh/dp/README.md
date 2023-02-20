@@ -22,3 +22,7 @@
 ## LongestCommonSubsequence.java
 
 두 문자열에서 공통으로 가진 부분 문자열 중 가장 긴 문자열의 길이를 구하라.
+
+## Knapsack.java
+
+배낭의 용량을 초과하지 않으면서 최대 가격을 구하라.
